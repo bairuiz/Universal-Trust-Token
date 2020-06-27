@@ -26,10 +26,10 @@
         app:layout_constraintTop_toBottomOf="@+id/text1">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textInput"
+            android:id="@+id/urlInput"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="Please enter text or url." />
+            android:hint="Please enter news url." />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView

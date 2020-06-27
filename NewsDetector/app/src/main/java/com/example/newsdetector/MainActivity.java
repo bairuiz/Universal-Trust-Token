@@ -16,14 +16,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final EditText input = findViewById(R.id.textInput);
+        final EditText urlInput = findViewById(R.id.urlInput);
 
         final Button button = findViewById(R.id.submitButton);
         button.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, DisplayActivity.class);
-                String message = input.getText().toString();
+                String message = urlInput.getText().toString();
+
+                // Send Message to Server
+                //Client.sendMessage(message);
+
                 intent.putExtra(EXTRA_MESSAGE, message);
                 startActivity(intent);
             }
