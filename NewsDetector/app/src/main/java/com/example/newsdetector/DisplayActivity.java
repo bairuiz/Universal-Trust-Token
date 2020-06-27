@@ -23,13 +23,15 @@ public class DisplayActivity extends AppCompatActivity {
         String reply = intent.getStringExtra(MainActivity.REPLY_MESSAGE);
 
         final TextView urlTextView = findViewById(R.id.url);
+        final TextView accuracyTextView = findViewById(R.id.accuracy);
         final TextView resultTextView = findViewById(R.id.result);
         final TextView percentTextView = findViewById(R.id.percent);
         final TextView analysisTextView = findViewById(R.id.analysis);
         urlTextView.setText(request);
         if (reply.equals("ERROR")) {
             resultTextView.setText("ERROR");
-            percentTextView.setText("Please try again later.");
+            resultTextView.setTextColor(0xFFE91E63);
+            accuracyTextView.setText("Please try again later.");
             return;
         } else if (reply.charAt(0) == 'F') {
             resultTextView.setText("FAKE");
