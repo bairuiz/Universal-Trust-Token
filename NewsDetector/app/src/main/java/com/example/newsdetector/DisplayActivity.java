@@ -41,6 +41,6 @@ public class DisplayActivity extends AppCompatActivity {
             resultTextView.setTextColor(0xFF1EE940);
         }
         percentTextView.setText(reply.substring(1, 4).trim() + "%");
-        analysisTextView.setText(reply.substring(4));
+        analysisTextView.setText(reply.substring(4).trim());
     }
 }

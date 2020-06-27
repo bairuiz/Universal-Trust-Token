@@ -6,15 +6,31 @@
     android:layout_height="match_parent"
     tools:context=".DisplayActivity">
 
-    <TextView
-        android:id="@+id/percent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#FF5722"
-        android:textSize="30sp"
+    <ScrollView
+        android:layout_width="387dp"
+        android:layout_height="240dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/accuracy" />
+        app:layout_constraintTop_toBottomOf="@+id/url">
+
+        <TextView
+            android:id="@+id/analysis"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="0dp"
+            android:scrollbarStyle="insideInset"
+            android:scrollbars="vertical"
+            android:text="No data. Unable to connect server."
+            android:textSize="24sp" />
+    </ScrollView>
 
     <TextView
         android:id="@+id/url"
@@ -42,7 +58,7 @@
         android:id="@+id/accuracy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:text="Accuracy"
         android:textColor="#2196F3"
         android:textSize="30sp"
@@ -51,20 +67,14 @@
         app:layout_constraintTop_toBottomOf="@+id/result" />
 
     <TextView
-        android:id="@+id/analysis"
-        android:layout_width="0dp"
+        android:id="@+id/percent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:scrollbarStyle="insideInset"
-        android:scrollbars="vertical"
-        android:text="No data. Unable to connect server."
-        android:textSize="24sp"
+        android:textColor="#FF5722"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/url" />
+        app:layout_constraintTop_toBottomOf="@+id/accuracy" />
 
     <TextView
         android:id="@+id/result"

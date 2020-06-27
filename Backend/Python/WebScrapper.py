@@ -7,4 +7,4 @@ if (url[:4] != "http"):
     url = "http://"+url
 page = requests.get(url)
 soup = BeautifulSoup(page.content, 'html.parser')
-print(soup.prettify()[:200])
+print(soup.prettify()[:600])
