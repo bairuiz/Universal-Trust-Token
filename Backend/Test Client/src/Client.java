@@ -7,7 +7,7 @@ public class Client
     public static void main(String args[])
     {
         try {
-        	Socket socket = new Socket("192.168.0.6", 5000);
+        	Socket socket = new Socket("24.6.204.81", 5000);
             DataInputStream input = new DataInputStream(socket.getInputStream());
             DataOutputStream output = new DataOutputStream(socket.getOutputStream());
             output.writeUTF("TEST CLIENT to be replaced by mobile app");
