@@ -65,7 +65,7 @@ public class Server
     
     private void process() throws Exception {
     	ProcessBuilder builder = new ProcessBuilder();
-    	builder.command("python", "..\\Python\\WebScrapper.py", request);
+    	builder.command("python", "..\\Python\\PythonProcess.py", request);
     	Process p = builder.start();
     	BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
     	StringBuilder sb = new StringBuilder();
@@ -73,7 +73,7 @@ public class Server
     	while((line = reader.readLine()) != null) {
         	sb.append(line);
     	}
-    	reply = String.format("%s%3dREPLY from windows server. Testing Analysis.\n%s", (count%2==0?"T":"F"), (50+count)%101, sb.toString());
+    	reply = sb.toString();
     }
   
     public static void main(String args[]) 
