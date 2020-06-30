@@ -4,8 +4,9 @@ Created on Sun Jun 28 00:10:03 2020
 
 @author: lixum
 """
-import WebScrapper
+import WebScrapper as ws
 import sys
 url = sys.argv[1]
-print("%s%3dREPLY from windows server. Testing Analysis." %("F", 80))
-WebScrapper.parse(url)
+news = ws.processUrl(url)
+print("%s%3dAuthor:%s\nPublish Date:%s\nTitle:%s\n"
+      %("F", 80, news.authors, news.publish_date, news.title))

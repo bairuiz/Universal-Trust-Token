@@ -1,10 +1,11 @@
-import requests
-from bs4 import BeautifulSoup
+from newspaper import Article
 
-def parse(url):
+def processUrl(url):
     if (url[:4] != "http"):
         url = "http://" + url
-    page = requests.get(url)
-    soup = BeautifulSoup(page.content, 'html.parser')
-    print(soup.prettify()[:200])
+    article = Article(url)
+    article.download()
+    article.parse()
+    return article
+ 
     
