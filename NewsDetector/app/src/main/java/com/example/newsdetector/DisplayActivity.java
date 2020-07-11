@@ -5,12 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
-
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.net.Socket;
+import android.widget.RatingBar;
 
 public class DisplayActivity extends AppCompatActivity {
     @Override
@@ -27,6 +22,7 @@ public class DisplayActivity extends AppCompatActivity {
         final TextView resultTextView = findViewById(R.id.result);
         final TextView percentTextView = findViewById(R.id.percent);
         final TextView analysisTextView = findViewById(R.id.analysis);
+        final RatingBar simpleRatingBar = findViewById(R.id.simpleRatingBar);
         urlTextView.setText(request);
         if (reply.equals("ERROR")) {
             resultTextView.setText("ERROR");
@@ -42,5 +38,7 @@ public class DisplayActivity extends AppCompatActivity {
         }
         percentTextView.setText(reply.substring(1, 4).trim() + "%");
         analysisTextView.setText(reply.substring(4).trim());
+        float rating = Float.valueOf(reply.substring(1, 4)) / 100 * 5;
+        simpleRatingBar.setRating(rating);
     }
 }

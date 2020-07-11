@@ -11,9 +11,11 @@
         android:layout_height="240dp"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/url">
 
@@ -46,19 +48,19 @@
         android:id="@+id/text2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:text="URL:"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/url"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/percent" />
+        app:layout_constraintTop_toBottomOf="@+id/simpleRatingBar" />
 
     <TextView
         android:id="@+id/accuracy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="4dp"
         android:text="Accuracy"
         android:textColor="#2196F3"
         android:textSize="30sp"
@@ -86,4 +88,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <RatingBar
+        android:id="@+id/simpleRatingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:background="#23F7FF00"
+        android:rating="2.5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/percent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

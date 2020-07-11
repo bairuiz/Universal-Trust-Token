@@ -9,4 +9,4 @@ import sys
 url = sys.argv[1]
 news = ws.processUrl(url)
 print("%s%3dAuthor:%s\nPublish Date:%s\nTitle:%s\n"
-      %("F", 80, news.authors, news.publish_date, news.title))
+      %("T", 80, news.authors, news.publish_date, news.title))
