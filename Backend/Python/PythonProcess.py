@@ -15,11 +15,12 @@ Created on Sun Jun 28 00:10:03 2020
 #
 import WebScrapper as ws
 import sys
+import random # Percentage Simulation
 try:
     url = sys.argv[1]
     news = ws.processUrl(url)
     print("O")
     print("%3dAuthor:%s\nPublish Date:%s\nTitle:%s\n"
-          %(80, news.authors, news.publish_date, news.title))
+          %(random.randint(0,100), news.authors, news.publish_date, news.title))
 except:
     print("U")
