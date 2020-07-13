@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
                 output.close();
                 socket.close();
             } catch (Exception e) {
-                display(request, "ERROR");
+                display(request, "U");
             }
         }
     }

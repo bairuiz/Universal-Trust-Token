@@ -7,17 +7,15 @@
     tools:context=".DisplayActivity">
 
     <ScrollView
-        android:layout_width="387dp"
-        android:layout_height="240dp"
+        android:layout_width="305dp"
+        android:layout_height="164dp"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
+        android:layout_marginTop="28dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/url">
+        app:layout_constraintTop_toBottomOf="@+id/simpleRatingBar">
 
         <TextView
             android:id="@+id/analysis"
@@ -31,37 +29,14 @@
             android:scrollbarStyle="insideInset"
             android:scrollbars="vertical"
             android:text="No data. Unable to connect server."
-            android:textSize="24sp" />
+            android:textSize="20sp" />
     </ScrollView>
 
     <TextView
-        android:id="@+id/url"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text2" />
-
-    <TextView
-        android:id="@+id/text2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:text="URL:"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/url"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/simpleRatingBar" />
-
-    <TextView
-        android:id="@+id/accuracy"
+        android:id="@+id/detail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="Accuracy"
         android:textColor="#2196F3"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -76,15 +51,16 @@
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/accuracy" />
+        app:layout_constraintTop_toBottomOf="@+id/detail" />
 
     <TextView
         android:id="@+id/result"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:textColorLink="#1EE940"
-        android:textSize="36sp"
+        android:textColor="#4CAF50"
+        android:textColorLink="#0C0C0C"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
