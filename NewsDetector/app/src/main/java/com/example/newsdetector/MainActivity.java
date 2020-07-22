@@ -49,12 +49,14 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void run() {
             try {
-                Socket socket = new Socket("24.6.204.81", 5000);
+                Socket socket = new Socket("128.2.144.116", 5000);
                 DataInputStream input = new DataInputStream(socket.getInputStream());
                 DataOutputStream output = new DataOutputStream(socket.getOutputStream());
-                output.writeUTF(request);
+                output.write(request.getBytes());
                 output.flush();
-                reply = input.readUTF();
+                byte[] inBytes = new byte[4096];
+                input.read(inBytes);
+                reply = new String(inBytes, "UTF-8");
                 display(request, reply);
                 input.close();
                 output.close();
