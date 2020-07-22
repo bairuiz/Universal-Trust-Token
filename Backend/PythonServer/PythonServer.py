@@ -14,33 +14,36 @@ import pandas as pd
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 #Bind the socket to the port
-server_address = ('localhost', 5000)
+server_address = ('128.2.144.116', 5000)
 print('listening on {} port {}'.format(*server_address))
 sock.bind(server_address)
 
 #Listen for incoming connections
-sock.listen()
+sock.listen(10)
 
 #Load all vectors and models
 cv_vector_title, cv_vector_text, tfidf_vector_title, tfidf_vector_text = tc.loadVectors()
 svm,rf,lr = tc.loadModels()
 
+cnt = 0
 while True:
     # Wait for a connection
-    print('waiting for a connection')
+    print('\nwaiting for connection ', cnt)
     connection, client_address = sock.accept()
+    cnt += 1
     try:
-        print('connection from', client_address)
+        print('connected from', client_address)
 
         while True:
             data = connection.recv(1024)
             if data:
                 
                 #decode to string
-                url = data.decode('utf-8')
+                request = data.decode('utf-8')
+                print('Client Request: ', request)
                 
                 #scrape
-                news = ws.processUrl(url)
+                news = ws.processUrl(request)
                 
                 #parse information into a dataframe
                 article = {'title': [news.title],'text': [news.text]}
@@ -51,17 +54,23 @@ while True:
                 percentage = tc.calculate(df,cv_vector_title, cv_vector_text, tfidf_vector_title, tfidf_vector_text, svm, rf, lr)
                 
                 #package info into JSON format
-                reply = 'title: ' + title + ', percentage: ' + percentage
+                # Status Codes:
+                # O - OK
+                # C - Connection timeout
+                # I - Invalid URL
+                # N - Invalid News URL
+                # U - Unkown Error
+                # reply format: 1 byte status code + 3 byte percentage + addional data
+                reply = 'O' + str(percentage).rjust(3) + 'title: ' + title
+                print('Server Reply: ', reply)
                 data = reply.encode()
                 connection.sendall(data)
             else:
-                print('no data from', client_address)
+                print('client done', client_address)
                 break
     except Exception as e:
-        print(str(e))
-        sock.close()
-        connection.close()
-        break
+        print('Lost connection or Processing issue')
+        #print(str(e))
     finally:
         # Clean up the connection
         connection.close()
