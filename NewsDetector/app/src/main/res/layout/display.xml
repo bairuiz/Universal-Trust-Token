@@ -28,7 +28,6 @@
             android:layout_marginRight="0dp"
             android:scrollbarStyle="insideInset"
             android:scrollbars="vertical"
-            android:text="No data. Unable to connect server."
             android:textSize="20sp" />
     </ScrollView>
 
@@ -59,7 +58,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:background="#41F44336"
+        android:background="#253656F4"
         android:rating="0"
         android:theme="@style/RatingBar"
         app:layout_constraintEnd_toEndOf="parent"

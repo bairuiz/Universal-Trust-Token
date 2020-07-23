@@ -33,8 +33,16 @@ public class DisplayActivity extends AppCompatActivity {
                 analysisTextView.setText(reply.substring(4).trim());
                 float rating = Float.valueOf(reply.substring(1, 4)) / 100 * 5;
                 simpleRatingBar.setRating(rating);
-                int color = mixTwoColors(Color.RED, Color.YELLOW, rating / 5);
-                simpleRatingBar.setProgressTintList(ColorStateList.valueOf(color));
+                //int color = mixTwoColors(Color.RED, Color.YELLOW, rating / 5);
+                if (rating >= 0 && rating <= 1.7) {
+                    simpleRatingBar.setProgressTintList(ColorStateList.valueOf(Color.RED));
+                }
+                if (rating > 1.7 && rating <= 3.3) {
+                    simpleRatingBar.setProgressTintList(ColorStateList.valueOf(Color.YELLOW));
+                }
+                if (rating > 3.3 && rating <= 5) {
+                    simpleRatingBar.setProgressTintList(ColorStateList.valueOf(Color.GREEN));
+                }
                 resultTextView.setText("Trust Rating");
                 resultTextView.setTextColor(0xFF4CAF50);
                 break;
@@ -51,15 +59,21 @@ public class DisplayActivity extends AppCompatActivity {
                 resultTextView.setTextColor(0xFFE91E63);
                 break;
             case 'U':
+            default:
                 resultTextView.setText("Unknown ERROR");
                 resultTextView.setTextColor(0xFFE91E63);
-                break;
-            default:
                 break;
         }
     }
 
-    private static int mixTwoColors( int color1, int color2, float amount )
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(DisplayActivity.this, MainActivity.class);
+        finish();
+        startActivity(intent);
+    }
+
+    /*private static int mixTwoColors( int color1, int color2, float amount )
     {
         final byte ALPHA_CHANNEL = 24;
         final byte RED_CHANNEL   = 16;
@@ -78,5 +92,5 @@ public class DisplayActivity extends AppCompatActivity {
                 ((float)(color2 & 0xff )*inverseAmount))) & 0xff;
 
         return a << ALPHA_CHANNEL | r << RED_CHANNEL | g << GREEN_CHANNEL | b << BLUE_CHANNEL;
-    }
+    } */
 }

@@ -11,6 +11,7 @@ import android.widget.EditText;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.Socket;
+import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
     public static final String REQUEST_MESSAGE = "request";
@@ -28,16 +29,26 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String url = urlInput.getText().toString();
-                Thread tcp = new Thread(new TcpThread(url));
-                tcp.start();
+                if (!url.isEmpty()) {
+                    button.setEnabled(false);
+                    Thread tcp = new Thread(new TcpThread(url));
+                    tcp.start();
+                }
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        final Button button = findViewById(R.id.submitButton);
+        button.setEnabled(true);
     }
 
     private void display(String request, String reply) {
         Intent intent = new Intent(MainActivity.this, DisplayActivity.class);
         intent.putExtra(REQUEST_MESSAGE, request);
         intent.putExtra(REPLY_MESSAGE, reply);
+        finish();
         startActivity(intent);
     }
 
@@ -57,10 +68,10 @@ public class MainActivity extends AppCompatActivity {
                 byte[] inBytes = new byte[4096];
                 input.read(inBytes);
                 reply = new String(inBytes, "UTF-8");
-                display(request, reply);
                 input.close();
                 output.close();
                 socket.close();
+                display(request, reply);
             } catch (Exception e) {
                 display(request, "C");
             }
