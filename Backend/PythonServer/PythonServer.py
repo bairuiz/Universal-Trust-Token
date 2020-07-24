@@ -23,7 +23,7 @@ sock.listen(10)
 
 #Load all vectors and models
 cv_vector_title, cv_vector_text, tfidf_vector_title, tfidf_vector_text = tc.loadVectors()
-svm,rf,lr = tc.loadModels()
+svm,rf,lr,mlp,lstm = tc.loadModels()
 
 cnt = 0
 while True:
@@ -51,7 +51,7 @@ while True:
                 
                 #calculate percentage of real
                 title = news.title
-                percentage = tc.calculate(df,cv_vector_title, cv_vector_text, tfidf_vector_title, tfidf_vector_text, svm, rf, lr)
+                percentage = tc.calculate(df,cv_vector_title, cv_vector_text, tfidf_vector_title, tfidf_vector_text, svm, rf, lr, mlp, lstm)
                 
                 #package info into JSON format
                 # Status Codes:
