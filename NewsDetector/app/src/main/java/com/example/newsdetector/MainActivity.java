@@ -11,7 +11,6 @@ import android.widget.EditText;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.Socket;
-import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
     public static final String REQUEST_MESSAGE = "request";

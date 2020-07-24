@@ -56,7 +56,7 @@ while True:
                     if percentage is -1:
                         reply = 'P'
                     else:
-                        reply = 'O' + str(percentage).rjust(3) + 'title: ' + title
+                        reply = 'O' + str(percentage).rjust(3) + 'Title: ' + title
 
                 print('Server Reply: ', reply)
                 data = reply.encode()

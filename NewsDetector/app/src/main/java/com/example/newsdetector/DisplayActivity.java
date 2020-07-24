@@ -8,9 +8,10 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.RatingBar;
-
 
 public class DisplayActivity extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -26,6 +27,13 @@ public class DisplayActivity extends AppCompatActivity {
         final TextView percentTextView = findViewById(R.id.percent);
         final TextView analysisTextView = findViewById(R.id.analysis);
         final RatingBar simpleRatingBar = findViewById(R.id.simpleRatingBar);
+        final Button button = findViewById(R.id.backButton);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
         char status = reply.isEmpty() ? 'U' : reply.charAt(0);
         switch (status) {
             case 'O':
