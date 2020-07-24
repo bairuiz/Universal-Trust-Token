@@ -12,9 +12,9 @@ import torch.nn.functional as F
 from config import Config
 import os
 import numpy as np
+import lstmpath 
 
 config = Config()
-
 
 def train(model, train_loader, val_loader, opt):
     step = 0
@@ -60,9 +60,9 @@ def val(model, loader):
     if acc > config.max_acc:
         config.max_acc = acc
         print('the model is saved and the acc is {}'.format(acc))
-        if os.path.exists('./model_save/cls_model.pkl'):
-            os.remove('./model_save/cls_model.pkl')
-        torch.save(model, './model_save/cls_model.pkl')
+        if os.path.exists(lstmpath.clsModelPath):
+            os.remove(lstmpath.clsModelPath)
+        torch.save(model, lstmpath.clsModelPath)
     model = model.train()
 
 
@@ -74,7 +74,7 @@ train_set, val_set = torch.utils.data.random_split(set, [train_size, validate_si
 # gpu or cpu
 #if config.gpu:
 #    model = model.cuda()
-model = torch.load("./model_save/cls_model.pkl")
+model = torch.load(lstmpath.clsModelPath)
 
 # cut into batche
 loader_train = DataLoader(train_set, batch_size=config.batch_size, shuffle=True, num_workers=0, drop_last=True)

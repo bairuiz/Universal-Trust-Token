@@ -4,7 +4,7 @@ import torch
 import glob
 import math
 import numpy as np
-
+import lstmpath
 
 class Config(object):
 
@@ -27,8 +27,8 @@ class Config(object):
 
         self.max_acc=0
 
-        self.train_path='./data/train.csv'
-        self.vocab_path='./data/vocab.txt'
+        self.train_path=lstmpath.trainPath
+        self.vocab_path=lstmpath.vocabPath
         self.vob_w2id,self.vob_id2w,self.vob_size=self.W2id()
 
         self.gpu=torch.cuda.is_available()

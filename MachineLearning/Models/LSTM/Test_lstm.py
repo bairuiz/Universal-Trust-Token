@@ -5,9 +5,9 @@ from model.classify import att_cls
 from dataprocess import get_txtid
 from config import Config
 import torch
+import lstmpath
 
 config = Config()
-
 
 def test(model, title, text):
     title_id = get_txtid(title, config.vob_w2id, config.title_max_seqlen)
@@ -36,16 +36,20 @@ def clean_dataset(X):
     X['clean_text'] = X['clean_text'].apply(lambda x: " ".join([Word(word).lemmatize() for word in x.split()]))
     return X
 
+def predict_proba(df, model):
+    return test(model, df.loc[0]['clean_title'], df.loc[0]['clean_text']).tolist()[0][0]
 
-url = 'https://www.foxnews.com/politics/supreme-court-strikes-down-state-ban-on-taxpayer-funding-for-religious-schools'
-article = Article(url)
-article.download()
-article.parse()
-articles = {'title': [article.title], 'text': [article.text]}
-df = pd.DataFrame(articles)
-df = clean_dataset(df)
+if __name__ == '__main__':
+    # Simulating parameters from PythonServer
+    url = 'https://www.foxnews.com/politics/supreme-court-strikes-down-state-ban-on-taxpayer-funding-for-religious-schools'
+    article = Article(url)
+    article.download()
+    article.parse()
+    articles = {'title': [article.title], 'text': [article.text]}
+    df = pd.DataFrame(articles)
+    df = clean_dataset(df)
+    model = torch.load(lstmpath.clsModelPath)
 
-model = torch.load("./model_save/cls_model.pkl")
-# pred:[probability of true, probability of false]
-pred = test(model, df.loc[0]['clean_title'], df.loc[0]['clean_text']).tolist()
-print("Trust rating: %.0f" % (pred[0][0] * 100))
+    # pred:[probability of true, probability of false]
+    pred = predict_proba(df, model)
+    print("Trust rating: %.0f" % (pred * 100))
