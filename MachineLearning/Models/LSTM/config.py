@@ -4,12 +4,10 @@ import torch
 import glob
 import math
 import numpy as np
-import lstmpath
 
 class Config(object):
 
     def __init__(self):
-
 
         self.hiden = 300
         self.n_layers = 1
@@ -27,8 +25,10 @@ class Config(object):
 
         self.max_acc=0
 
-        self.train_path=lstmpath.trainPath
-        self.vocab_path=lstmpath.vocabPath
+        self.cls_model_path = '/home/xumeil/Python_Server/lstm_data/model_save/cls_model.pkl'
+        self.train_path = '/home/xumeil/Python_Server/lstm_data/data/train.csv'
+        self.vocab_path = '/home/xumeil/Python_Server/lstm_data/data/vocab.txt'
+        self.data_path = '/home/xumeil/Python_Server/lstm_data/data/newData_w_title.csv'
         self.vob_w2id,self.vob_id2w,self.vob_size=self.W2id()
 
         self.gpu=torch.cuda.is_available()
@@ -44,9 +44,4 @@ class Config(object):
                 id2w[i] = word
                 i += 1
             return w2id, id2w, i
-
-
-
-
-
 

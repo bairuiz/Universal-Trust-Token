@@ -5,7 +5,6 @@ from model.classify import att_cls
 from dataprocess import get_txtid
 from config import Config
 import torch
-import lstmpath
 
 config = Config()
 
@@ -48,7 +47,7 @@ if __name__ == '__main__':
     articles = {'title': [article.title], 'text': [article.text]}
     df = pd.DataFrame(articles)
     df = clean_dataset(df)
-    model = torch.load(lstmpath.clsModelPath)
+    model = torch.load(config.cls_model_path)
 
     # pred:[probability of true, probability of false]
     pred = predict_proba(df, model)

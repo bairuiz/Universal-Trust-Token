@@ -7,7 +7,6 @@ import config
 
 config = config.Config()
 
-
 class att_cls(nn.Module):
     def __init__(self):
         super(att_cls, self).__init__()

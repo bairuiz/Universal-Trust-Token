@@ -3,7 +3,6 @@ import nltk
 # nltk.download('punkt')
 import numpy as np
 import math
-import lstmpath
 
 # Build a vocabulary
 def build_vocab(csv_path, save_path):
@@ -32,9 +31,7 @@ def build_vocab(csv_path, save_path):
     f1.close()
 
 
-build_vocab(lstmpath.dataPath, lstmpath.vocabPath)
-
-
+build_vocab(config.data_path, config.vocab_path)
 
 def build_train_csv(csv_path):
     titles, texts, labels = [], [], []
@@ -53,10 +50,10 @@ def build_train_csv(csv_path):
     dic = {'label': labels, 'title': titles, 'text': texts}
     data = pd.DataFrame(dic, columns=['label', 'title', 'text'])
     data = data.dropna(axis=0, how='any')
-    data.to_csv(lstmpath.trainPath, index=0)
+    data.to_csv(config.train_path, index=0)
 
 
-build_train_csv(lstmpath.dataPath)
+build_train_csv(config.data_path)
 
 def get_mean_max(path):
     len_title, len_text = [], []
@@ -71,4 +68,4 @@ def get_mean_max(path):
     print(a.mean(), a.max(-1))
     print(b.mean(), b.max(-1))
 
-# get_mean_max(lstmpath.trainPath)
+# get_mean_max(config.train_path)
