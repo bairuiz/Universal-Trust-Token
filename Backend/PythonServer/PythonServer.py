@@ -5,25 +5,20 @@ Created on Sun Jul 19 22:12:21 2020
 
 @author: chi
 """
+print('Starting server...')
 import socket
-import TrustCal as tc
-import WebScrapper as ws
-import pandas as pd
+import ServerUtil as su
 
 #Create a TCP/IP socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 #Bind the socket to the port
 server_address = ('128.2.144.116', 5000)
-print('listening on {} port {}'.format(*server_address))
+print('\nlistening on {} port {}'.format(*server_address))
 sock.bind(server_address)
 
 #Listen for incoming connections
 sock.listen(10)
-
-#Load all vectors and models
-cv_vector_title, cv_vector_text, tfidf_vector_title, tfidf_vector_text = tc.loadVectors()
-svm,rf,lr,mlp,lstm = tc.loadModels()
 
 cnt = 0
 while True:
@@ -43,25 +38,26 @@ while True:
                 print('Client Request: ', request)
                 
                 #scrape
-                news = ws.processUrl(request)
-                
-                #parse information into a dataframe
-                article = {'title': [news.title],'text': [news.text]}
-                df = pd.DataFrame(article)
-                
-                #calculate percentage of real
-                title = news.title
-                percentage = tc.calculate(df,cv_vector_title, cv_vector_text, tfidf_vector_title, tfidf_vector_text, svm, rf, lr, mlp, lstm)
-                
-                #package info into JSON format
+                news = su.download(request)
+
                 # Status Codes:
                 # O - OK
-                # C - Connection timeout
+                # C - Connection Timeout
                 # I - Invalid URL
-                # N - Invalid News URL
-                # U - Unkown Error
-                # reply format: 1 byte status code + 3 byte percentage + addional data
-                reply = 'O' + str(percentage).rjust(3) + 'title: ' + title
+                # N - Not News URL
+                # P - Processing Error
+                # reply format: 1 byte status code + 3 byte percentage(optional) + addional data(optional)
+                if news is None:
+                    reply = 'I'
+                elif not news.title or not news.text:
+                    reply = 'N'
+                else:
+                    title, percentage = su.process(news)
+                    if percentage is -1:
+                        reply = 'P'
+                    else:
+                        reply = 'O' + str(percentage).rjust(3) + 'title: ' + title
+
                 print('Server Reply: ', reply)
                 data = reply.encode()
                 connection.sendall(data)
@@ -70,7 +66,7 @@ while True:
                 break
     except Exception as e:
         print('Lost connection or Processing issue')
-        #print(str(e))
+        print(str(e))
     finally:
         # Clean up the connection
         connection.close()

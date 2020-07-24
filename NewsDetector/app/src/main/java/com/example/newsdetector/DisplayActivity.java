@@ -47,7 +47,7 @@ public class DisplayActivity extends AppCompatActivity {
                 resultTextView.setTextColor(0xFF4CAF50);
                 break;
             case 'C':
-                resultTextView.setText("Connection timeout");
+                resultTextView.setText("Connection Timeout");
                 resultTextView.setTextColor(0xFFE91E63);
                 break;
             case 'I':
@@ -55,10 +55,13 @@ public class DisplayActivity extends AppCompatActivity {
                 resultTextView.setTextColor(0xFFE91E63);
                 break;
             case 'N':
-                resultTextView.setText("Invalid News URL");
+                resultTextView.setText("Not News URL");
                 resultTextView.setTextColor(0xFFE91E63);
                 break;
-            case 'U':
+            case 'P':
+                resultTextView.setText("Processing Error");
+                resultTextView.setTextColor(0xFFE91E63);
+                break;
             default:
                 resultTextView.setText("Unknown ERROR");
                 resultTextView.setTextColor(0xFFE91E63);
