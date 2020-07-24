@@ -5,11 +5,10 @@ Train classifier
 import torch.optim as optim
 from model.classify import att_cls
 from dataprocess import textDataset
-from config import Config
+from lconfig import Config
 from torch.utils.data import DataLoader
 import torch
 import torch.nn.functional as F
-from config import Config
 import os
 import numpy as np
 

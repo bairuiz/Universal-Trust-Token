@@ -2,10 +2,12 @@ import pickle
 import pandas as pd
 from textblob import Word
 from newspaper import Article
-#from dataprocess import get_txtid
-from config import Config
 import torch
+import sys
 
+''' Additional Machine Learning Models '''
+sys.path.append('../../MachineLearning/Models/LSTM')
+import lstm
 
 def loadVectors():
     #loading CountVec object
@@ -23,8 +25,8 @@ def loadModels():
     rf = pickle.load(open('/home/xumeil/Python_Server/RandomForest_model_countvec_trigram.sav','rb'))
     lr = pickle.load(open('/home/xumeil/Python_Server/LR_countvec_1-3.sav','rb'))
     mlp = pickle.load(open('/home/xumeil/Python_Server/finalized_model_tfidf_tri_mlp.sav','rb'))
-    lstm = 0 # torch.load("/home/xumeil/Python_Server/cls_model.pkl")
-    return svm,rf,lr,mlp,lstm
+    lstm_model = torch.load(lstm.config.cls_model_path)
+    return svm,rf,lr,mlp,lstm_model
 
 def clean_dataset(X):
     #remove digits 
@@ -64,17 +66,7 @@ def makeTFIDF_vector(df,tfidf_vector_title,tfidf_vector_text):
     vectorized_tfidf = pd.concat([vectorized_title, vectorized_text], axis=1)
     return vectorized_tfidf
 
-"""
-def lstm_predict_proba(model, title, text):
-    title_id = get_txtid(title, config.vob_w2id, config.title_max_seqlen)
-    text_id = get_txtid(text, config.vob_w2id, config.max_seqlen)
-    title_id, text_id = torch.tensor([title_id]), torch.tensor([text_id])
-    if config.gpu:
-        title_id, text_id = title_id.cuda(), text_id.cuda()
-    confid = model(title_id, title_id.eq(0), text_id, text_id.eq(0))
-    return confid
-"""
-def calculate(df,cv_vector_title, cv_vector_text, tfidf_vector_title, tfidf_vector_text, svm, rf, lr, mlp, lstm):
+def calculate(df,cv_vector_title, cv_vector_text, tfidf_vector_title, tfidf_vector_text, svm, rf, lr, mlp, lstm_model):
     df = clean_dataset(df)
     vectorized_cv = makeCV_vector(df,cv_vector_title,cv_vector_text)
     vectorized_tfidf = makeTFIDF_vector(df,tfidf_vector_title,tfidf_vector_text)
@@ -82,6 +74,6 @@ def calculate(df,cv_vector_title, cv_vector_text, tfidf_vector_title, tfidf_vect
     prediction_rf = rf.predict_proba(vectorized_cv)
     prediction_lr = lr.predict_proba(vectorized_cv)
     prediction_mlp = mlp.predict_proba(vectorized_tfidf)
-    """prediction_lstm = lstm_predict_proba(lstm, df.loc[0]['clean_title'], df.loc[0]['clean_text']).tolist()"""
-    percentage = (prediction_svm[0][1] + prediction_rf[0][1] + prediction_lr[0][1] + prediction_mlp[0][1]) / 4 * 100 # + prediction_lstm[0][0])/5 * 100
+    prediction_lstm = lstm.predict_proba(df, lstm_model)
+    percentage = (prediction_svm[0][1] + prediction_rf[0][1] + prediction_lr[0][1] + prediction_mlp[0][1] + prediction_lstm) / 5 * 100
     return str(int(round(percentage,0)))

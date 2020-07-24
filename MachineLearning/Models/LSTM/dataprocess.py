@@ -1,5 +1,5 @@
 import torch
-from config import Config
+from lconfig import Config
 from torch.utils.data import Dataset
 import pandas as pd
 

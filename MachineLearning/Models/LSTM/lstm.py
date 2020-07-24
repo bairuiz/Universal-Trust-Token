@@ -3,7 +3,7 @@ from textblob import Word
 from newspaper import Article
 from model.classify import att_cls
 from dataprocess import get_txtid
-from config import Config
+from lconfig import Config
 import torch
 
 config = Config()

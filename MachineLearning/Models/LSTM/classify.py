@@ -3,9 +3,9 @@ import torch.nn.functional as F
 import torch
 from torch.autograd import Variable
 import numpy as np
-import config
+from lconfig import Config
 
-config = config.Config()
+config = Config()
 
 class att_cls(nn.Module):
     def __init__(self):

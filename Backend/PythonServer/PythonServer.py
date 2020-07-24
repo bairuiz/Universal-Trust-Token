@@ -47,13 +47,13 @@ while True:
                 # N - Not News URL
                 # P - Processing Error
                 # reply format: 1 byte status code + 3 byte percentage(optional) + addional data(optional)
-                if news is None:
+                if not news:
                     reply = 'I'
                 elif not news.title or not news.text:
                     reply = 'N'
                 else:
                     title, percentage = su.process(news)
-                    if percentage is -1:
+                    if not title or percentage is -1:
                         reply = 'P'
                     else:
                         reply = 'O' + str(percentage).rjust(3) + 'Title: ' + title
