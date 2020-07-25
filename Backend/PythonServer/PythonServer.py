@@ -18,17 +18,22 @@ print('\nlistening on {} port {}'.format(*server_address))
 sock.bind(server_address)
 
 #Listen for incoming connections
-sock.listen(10)
+sock.listen()
 
 cnt = 0
 while True:
-    # Wait for a connection
-    print('\nwaiting for connection ', cnt)
-    connection, client_address = sock.accept()
-    cnt += 1
+    try:
+        # Wait for a connection
+        print('\nwaiting for connection ', cnt)
+        connection, client_address = sock.accept()
+        cnt += 1
+    except:
+        print('\nInterrupt received. Closing socket.')
+        sock.close()
+        break
+
     try:
         print('connected from', client_address)
-
         while True:
             data = connection.recv(1024)
             if data:
@@ -64,10 +69,8 @@ while True:
             else:
                 print('client done', client_address)
                 break
-    except Exception as e:
-        print('Lost connection or Processing issue')
-        print(str(e))
+    except:
+        print('Lost client connection.')
     finally:
         # Clean up the connection
         connection.close()
-sock.close()
