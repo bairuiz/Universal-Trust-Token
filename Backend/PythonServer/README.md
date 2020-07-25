@@ -1,1 +1,2 @@
-Python server with a Test Client in Java
+Main server program in PythonServer.py.
+Please use python3 to run program.

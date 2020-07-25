@@ -37,12 +37,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public void onBackPressed() {
-        final Button button = findViewById(R.id.submitButton);
-        button.setEnabled(true);
-    }
-
     private void display(String request, String reply) {
         Intent intent = new Intent(MainActivity.this, DisplayActivity.class);
         intent.putExtra(REQUEST_MESSAGE, request);
