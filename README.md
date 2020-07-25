@@ -2,17 +2,17 @@
 
 Steps to upload trained model or data:
 =====
--Please check file paths in:
+- Please check file paths in:
 ```
 Universal-Trust-Token/Backend/PythonServer/TrustCal.py
 Universal-Trust-Token/MachineLearning/Models/LSTM/lconfig.py
 ```
--On Local Laptop Terminal:
+- On Local Laptop Terminal:
 ```
 scp -r <folder> username@tcs_universal_tt.heinz.cmu.edu:<model or data path>
 scp <files> username@tcs_universal_tt.heinz.cmu.edu:<model or data path>
 ```
--Eg.
+- For example:
 ```
 scp -r data username@tcs_universal_tt.heinz.cmu.edu:~xumeil/Python_Server/lstm_data/
 or
@@ -39,5 +39,5 @@ Steps to run TestClient (Simulator for app's reply/request):
 ```
 git clone <repo>
 ```
-Open Universal-Trust-Token/Backend/TestClient/ in Eclipse and run Client.java
-Comment out socekt close to simulate client connection drop.
+- Open Universal-Trust-Token/Backend/TestClient/ in Eclipse and run Client.java
+- Comment out socekt close to simulate client connection drop.
