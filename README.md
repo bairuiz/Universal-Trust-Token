@@ -2,7 +2,7 @@ Steps to upload trained model or data:
 =====
 - Please check file paths in:
 ```
-Universal-Trust-Token/Backend/PythonServer/TrustCal.py
+Universal-Trust-Token/Server/PythonServer/TrustCal.py
 Universal-Trust-Token/MachineLearning/Models/LSTM/lconfig.py
 ```
 - On Local Laptop Terminal:
@@ -22,8 +22,12 @@ Steps to run server:
 ```
 ssh username@tcs_universal_tt.heinz.cmu.edu
 
-cd ~xumeil/Universal-Trust-Token/Backend/PythonServer/
+cd ~xumeil/Universal-Trust-Token/Server/PythonServer/
 python3 -W ignore PythonServer.py
+
+or
+
+python3 -W ignore ~xumeil/Universal-Trust-Token/Server/PythonServer/PythonServer.py
 ```
 - Issue ctrl+c interrupt to close server.
 
@@ -38,5 +42,5 @@ Steps to run TestClient (Simulator for app's reply/request):
 ```
 git clone <repo>
 ```
-- Open Universal-Trust-Token/Backend/TestClient/ in Eclipse and run Client.java
+- Open Universal-Trust-Token/Server/TestClient/ in Eclipse and run Client.java
 - Comment out socekt close to simulate client connection drop.

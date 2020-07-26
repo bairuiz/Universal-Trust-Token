@@ -4,9 +4,10 @@ from textblob import Word
 from newspaper import Article
 import torch
 import sys
+import os
 
 ''' Additional Machine Learning Models '''
-sys.path.append('../../MachineLearning/Models/LSTM')
+sys.path.append(os.path.dirname(__file__) + '/../../MachineLearning/Models/LSTM')
 import lstm
 
 def loadVectors():
