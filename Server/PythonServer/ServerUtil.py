@@ -1,11 +1,12 @@
 from newspaper import Article
 import TrustCal as tc
 import pandas as pd
+from Log import log
 
-print('Loading module data...')
+log('Loading module data...')
 cv_vector_title, cv_vector_text, tfidf_vector_title, tfidf_vector_text = tc.loadVectors()
 svm,rf,lr,mlp,lstm = tc.loadModels()
-print('Loading complete.')
+log('Loading complete.')
 
 def download(url):
     if (url[:4] != "http"):

@@ -5,6 +5,7 @@ from newspaper import Article
 import torch
 import sys
 import os
+from Log import log
 
 ''' Additional Machine Learning Models '''
 sys.path.append(os.path.dirname(__file__) + '/../../MachineLearning/Models/LSTM')
@@ -71,10 +72,11 @@ def calculate(df,cv_vector_title, cv_vector_text, tfidf_vector_title, tfidf_vect
     df = clean_dataset(df)
     vectorized_cv = makeCV_vector(df,cv_vector_title,cv_vector_text)
     vectorized_tfidf = makeTFIDF_vector(df,tfidf_vector_title,tfidf_vector_text)
-    prediction_svm = svm.predict_proba(vectorized_tfidf)
-    prediction_rf = rf.predict_proba(vectorized_cv)
-    prediction_lr = lr.predict_proba(vectorized_cv)
-    prediction_mlp = mlp.predict_proba(vectorized_tfidf)
+    prediction_svm = svm.predict_proba(vectorized_tfidf)[0][1]
+    prediction_rf = rf.predict_proba(vectorized_cv)[0][1]
+    prediction_lr = lr.predict_proba(vectorized_cv)[0][1]
+    prediction_mlp = mlp.predict_proba(vectorized_tfidf)[0][1]
     prediction_lstm = lstm.predict_proba(df, lstm_model)
-    percentage = (prediction_svm[0][1] + prediction_rf[0][1] + prediction_lr[0][1] + prediction_mlp[0][1] + prediction_lstm) / 5 * 100
+    log('Machine Learning Predictions:\nSVM:', prediction_svm, 'RF:', prediction_rf, 'LR:', prediction_lr, 'MLP:', prediction_mlp, 'LSTM:', prediction_lstm)
+    percentage = (prediction_svm + prediction_rf + prediction_lr + prediction_mlp + prediction_lstm) / 5 * 100
     return str(int(round(percentage,0)))
