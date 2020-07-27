@@ -28,5 +28,6 @@ def process(news):
         title = news.title
         percentage = tc.calculate(df,cv_vector_title, cv_vector_text, tfidf_vector_title, tfidf_vector_text, svm, rf, lr, mlp, lstm)
         return title, percentage
-    except:
+    except Exception as e:
+        log(e)
         return '', -1
