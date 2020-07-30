@@ -51,7 +51,7 @@ public class DisplayActivity extends AppCompatActivity {
                 if (rating > 3.3 && rating <= 5) {
                     simpleRatingBar.setProgressTintList(ColorStateList.valueOf(Color.GREEN));
                 }
-                resultTextView.setText("Trust Rating");
+                resultTextView.setText("Trust Token");
                 resultTextView.setTextColor(0xFF4CAF50);
                 break;
             case 'C':

@@ -1,6 +1,4 @@
 import datetime
-import os
-import sys
 
 dt = datetime.datetime.now()
 dirPath = '/home/xumeil/log/'
