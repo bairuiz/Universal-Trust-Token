@@ -23,6 +23,11 @@ Steps to run server:
 ssh username@tcs_universal_tt.heinz.cmu.edu
 
 cd ~xumeil/Universal-Trust-Token/Server/PythonServer/
+
+go to Universal-Trust-Token/Server/PythonServer/Models/ and unzip newData_w_title.csv.zip
+run the following line to create the vectors:
+python3 vectors.py
+
 python3 -W ignore PythonServer.py
 
 or
