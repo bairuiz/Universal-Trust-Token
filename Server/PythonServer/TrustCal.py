@@ -13,20 +13,20 @@ import lstm
 
 def loadVectors():
     #loading CountVec object
-    cv_vector_title = pickle.load(open('/home/xumeil/Python_Server/cv_1-3_vector_title.sav','rb'))
-    cv_vector_text = pickle.load(open('/home/xumeil/Python_Server/cv_1-3_vector_text.sav','rb'))
+    cv_vector_title = pickle.load(open('Models/cv_1-3_vector_title.sav','rb'))
+    cv_vector_text = pickle.load(open('Models/cv_1-3_vector_text.sav','rb'))
     
     #loading TF-IDF object
-    tfidf_vector_title = pickle.load(open('/home/xumeil/Python_Server/tfidf_1-3_vector_title.sav','rb'))
-    tfidf_vector_text = pickle.load(open('/home/xumeil/Python_Server/tfidf_1-3_vector_text.sav','rb'))
+    tfidf_vector_title = pickle.load(open('Models/tfidf_1-3_vector_title.sav','rb'))
+    tfidf_vector_text = pickle.load(open('Models/tfidf_1-3_vector_text.sav','rb'))
     
     return cv_vector_title, cv_vector_text, tfidf_vector_title, tfidf_vector_text
 
 def loadModels():
-    svm = pickle.load(open('/home/xumeil/Python_Server/SVM_tfidf_1-3.sav','rb'))
-    rf = pickle.load(open('/home/xumeil/Python_Server/RandomForest_model_countvec_trigram.sav','rb'))
-    lr = pickle.load(open('/home/xumeil/Python_Server/LR_countvec_1-3.sav','rb'))
-    mlp = pickle.load(open('/home/xumeil/Python_Server/finalized_model_tfidf_tri_mlp.sav','rb'))
+    svm = pickle.load(open('Models/SVM_tfidf_1-3.sav','rb'))
+    rf = pickle.load(open('Models/RandomForest_model_countvec_trigram.sav','rb'))
+    lr = pickle.load(open('Models/LR_countvec_1-3.sav','rb'))
+    mlp = pickle.load(open('Models/finalized_model_tfidf_tri_mlp.sav','rb'))
     lstm_model = torch.load(lstm.config.cls_model_path)
     return svm,rf,lr,mlp,lstm_model
 
