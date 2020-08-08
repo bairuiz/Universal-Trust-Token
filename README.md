@@ -19,6 +19,7 @@ python3 -W ignore PythonServer.py
 This will start the python server which calls the other modules too.
 ```
 - Issue ctrl+c interrupt to close server.
+- Change the IP address in PythonServer to localhost or other addresses
 
 Steps to run app:
 =====
