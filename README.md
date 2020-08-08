@@ -34,6 +34,7 @@ git clone <repo>
 - Comment out socket close to simulate client connection drop.
 
 Description of files/folders:
+=====
 
 Folder: Universal-Trust-Token/Server/PythonServer/Models/
 - This folder contains all the pre-trained models that are called by our server to predict the news articale passed by our application.
